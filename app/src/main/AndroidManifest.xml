@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zaoqibu.foursteppainting" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.zaoqibu.foursteppainting.PaintingGroupActivity"
+            android:parentActivityName="com.zaoqibu.foursteppainting.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zaoqibu.foursteppainting.MainActivity" />
+        </activity>
+
+        <activity android:name=".PaintingActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape" />
+
+        <activity android:name="com.zaoqibu.foursteppainting.AboutActivity"
+            android:parentActivityName="com.zaoqibu.foursteppainting.MainActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zaoqibu.foursteppainting.MainActivity" />
+        </activity>
+
+        <!-- APP KEY 和 渠道 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="538d031256240ba95e15d341" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="umeng" >
+            <!-- google_play wandoujiao 360 wo jifeng yingyongbao mumayi yingyonghui lenovo taobao meizu huawei nduoa 51vapp 91 3g hiapk anzhi baoping baoruan sogou yiyou dfone jinli suning jd china_mobile-->
+        </meta-data>
+    </application>
+
+</manifest>
