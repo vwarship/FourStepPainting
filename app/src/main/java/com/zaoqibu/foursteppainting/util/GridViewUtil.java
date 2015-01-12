@@ -9,11 +9,14 @@ public class GridViewUtil
 {
 	private static int PORTRAIT_GRIDVIEW_COLUMN_NUMBER = 2;
 	private static int LANDSCAPE_GRIDVIEW_COLUMN_NUMBER = 4;
-	
-	public static int calcItemWidth(Activity activity)
+
+    public static int calcItemWidth(Activity activity) {
+        int colNum = getColumnNumber(activity);
+        return calcItemWidth(activity, colNum);
+    }
+
+    public static int calcItemWidth(Activity activity, int colNum)
 	{
-		int colNum = getColumnNumber(activity);
-		
 		Resources r = activity.getResources();
 		float padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 
 				8*2 + (colNum-1)*8, 

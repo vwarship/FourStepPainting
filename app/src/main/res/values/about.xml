@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_introduction">一起玩、学习、成长。</string>
-    <string name="about_version">版本号：3.1.0</string>
+    <string name="about_version">版本号：3.2.0</string>
     <string name="about_qq">QQ　：zaoqibu@qq.com</string>
     <string name="about_weixin">微信号：zaoqibu</string>
     <string name="about_email">邮　箱：zaoqibu@qq.com</string>

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.umeng.analytics.MobclickAgent;
-import com.zaoqibu.foursteppainting.domain.PaintingGroup;
-import com.zaoqibu.foursteppainting.domain.PaintingGroups;
+import com.zaoqibu.foursteppainting.domain.Painting;
+import com.zaoqibu.foursteppainting.domain.PaintingCategory;
 import com.zaoqibu.foursteppainting.util.BitmapUtil;
 import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
 
@@ -19,28 +19,26 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GridViewAdapter extends BaseAdapter
+public class PaintingCategoryGridViewAdapter extends BaseAdapter
 {
 	private Context context;
 	private int calcGridItemWidth;
 	
-	private PaintingGroups paintingGroups;
-	
-	private Bitmap bitmap = null;
+	private PaintingCategory paintingCategory;
 	private MediaPlayerSingleton mediaPlayer;
-	
-	public GridViewAdapter(Context context, int calcGridItemWidth, PaintingGroups paintingGroups)
+
+	public PaintingCategoryGridViewAdapter(Context context, int calcGridItemWidth, PaintingCategory paintingCategory)
 	{
 		this.context = context;
 		this.calcGridItemWidth = calcGridItemWidth;
-		this.paintingGroups = paintingGroups;
+		this.paintingCategory = paintingCategory;
 		
 		mediaPlayer = MediaPlayerSingleton.getInstance();
 	}
 
 	@Override
 	public int getCount() {
-		return paintingGroups.count();
+		return paintingCategory.count();
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class GridViewAdapter extends BaseAdapter
 		
 		if (convertView == null)
 		{
-			item = layoutInflater.inflate(R.layout.gridview_item, parent, false);
+			item = layoutInflater.inflate(R.layout.gridview_item_paintingcategory, parent, false);
 			item.setLayoutParams(new GridView.LayoutParams(calcGridItemWidth, calcGridItemWidth));
 		}
 		else
@@ -71,15 +69,14 @@ public class GridViewAdapter extends BaseAdapter
 			item = convertView;
 		}
 		
-		final PaintingGroup paintingGroup = paintingGroups.get(position);
+		final Painting painting = paintingCategory.get(position);
 		
 		ImageView imageView = (ImageView)item.findViewById(R.id.itemImage);
-		
-		bitmap = BitmapUtil.decodeSampledBitmapFromResource(context.getResources(), paintingGroup.getIcon(), 150, 150);
+		Bitmap bitmap = BitmapUtil.decodeSampledBitmapFromResource(context.getResources(), painting.getIcon(), 100, 100);
 		imageView.setImageBitmap(bitmap);
-		
+
 		TextView textView = (TextView)item.findViewById(R.id.itemText);
-		textView.setText(paintingGroup.getName());
+		textView.setText(painting.getName());
 
 		ImageView imageViewPlay = (ImageView)item.findViewById(R.id.imageViewPlay);
 		imageViewPlay.setOnClickListener(new View.OnClickListener() {
@@ -87,14 +84,15 @@ public class GridViewAdapter extends BaseAdapter
 			public void onClick(View v) {
 				//事件统计
 				Map<String,String> map = new HashMap<String,String>();
-				map.put("group", context.getResources().getString(paintingGroup.getName()));
-				MobclickAgent.onEvent(context, "group_sound", map);
-				
-				mediaPlayer.play(context, paintingGroup.getSound());
+				map.put("group", context.getResources().getString(paintingCategory.getName()));
+				map.put("painting", context.getResources().getString(painting.getName()));
+				MobclickAgent.onEvent(context, "painting_sound", map);
+
+				mediaPlayer.play(context, painting.getSound());
 			}
 		});
 		
 		return item;
 	}
-	
+
 }

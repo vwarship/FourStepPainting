@@ -18,12 +18,12 @@
 	    android:background="@drawable/animation_banner" />
     
     <GridView
-        android:id="@+id/gridView"
+        android:id="@+id/gvPaintingCategory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:horizontalSpacing="@dimen/activity_gridview_spacing"
         android:verticalSpacing="@dimen/activity_gridview_spacing"
-        android:numColumns="2"
+        android:numColumns="3"
         android:stretchMode="columnWidth" />
 </LinearLayout>

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.umeng.analytics.MobclickAgent;
-import com.zaoqibu.foursteppainting.domain.PaintingGroup;
-import com.zaoqibu.foursteppainting.domain.PaintingGroups;
+import com.zaoqibu.foursteppainting.domain.PaintingCategory;
+import com.zaoqibu.foursteppainting.domain.PaintingCategories;
 import com.zaoqibu.foursteppainting.util.GridViewUtil;
 import com.zaoqibu.foursteppainting.util.History;
 import com.zaoqibu.foursteppainting.util.PaintingFactory;
@@ -26,70 +26,72 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends Activity 
 {
-	private PaintingGroups paintingGroups;
-	
-	public MainActivity()
-	{
-	}
+	private PaintingCategories paintingCategories;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		ImageView imageViewBanner = (ImageView)findViewById(R.id.banner);
-		AnimationDrawable animBanner = (AnimationDrawable)imageViewBanner.getBackground();
-		animBanner.start();
-		
-		initPaintingGroups();
-		
-		final int calcGridItemWidth = GridViewUtil.calcItemWidth(this);
-		
-		GridView gridView = (GridView)findViewById(R.id.gridView);
-		gridView.setNumColumns(GridViewUtil.getColumnNumber(this));
-		gridView.setAdapter(new GridViewAdapter(this, calcGridItemWidth, paintingGroups));
-		gridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				PaintingGroup paintingGroup = paintingGroups.get(position);
 
-				if (position == 0)	//历史记录
-					paintingGroup = getPaintingGroupWithHistory();
-				
-				//事件统计
-				Map<String,String> map = new HashMap<String,String>();
-				map.put("group", getResources().getString(paintingGroup.getName()));
-				MobclickAgent.onEvent(MainActivity.this, "group", map);
-				
-				Intent intent = new Intent(MainActivity.this, PaintingGroupActivity.class);
-				intent.putExtra(PaintingGroupActivity.ARG_PAINTINGGROUP, paintingGroup);
-				startActivity(intent);
-			}
-		});
+        createBannerAnimation();
+        initPaintingCategoryGridView();
 		
-//		MobclickAgent.setDebugMode( true );	//调试模式
 		MobclickAgent.openActivityDurationTrack(false);
 		MobclickAgent.updateOnlineConfig(this);
 	}
-	
-	private void initPaintingGroups()
+
+    private void createBannerAnimation() {
+        ImageView imageViewBanner = (ImageView)findViewById(R.id.banner);
+        AnimationDrawable animBanner = (AnimationDrawable)imageViewBanner.getBackground();
+        animBanner.start();
+    }
+
+    private void initPaintingCategoryGridView() {
+        initPaintingGroups();
+
+        final int colNum = 3;
+        final int calcGridItemWidth = GridViewUtil.calcItemWidth(this, colNum);
+
+        GridView gvPaintingCategory = (GridView)findViewById(R.id.gvPaintingCategory);
+        gvPaintingCategory.setAdapter(new PaintingCategoriesGridViewAdapter(this, calcGridItemWidth, paintingCategories));
+        gvPaintingCategory.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                PaintingCategory paintingCategory = paintingCategories.get(position);
+
+                if (position == 0)    //历史记录
+                    paintingCategory = getPaintingGroupWithHistory();
+
+                //事件统计
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("group", getResources().getString(paintingCategory.getName()));
+                MobclickAgent.onEvent(MainActivity.this, "group", map);
+
+                Intent intent = new Intent(MainActivity.this, PaintingCategoryActivity.class);
+                intent.putExtra(PaintingCategoryActivity.ARG_PAINTING_CATEGORY, paintingCategory);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initPaintingGroups()
 	{
-		List<PaintingGroup> paintingGroups = new ArrayList<PaintingGroup>();
+		List<PaintingCategory> paintingCategories = new ArrayList<PaintingCategory>();
 		
-		paintingGroups.add(getPaintingGroupWithHistory());
-		addPaintingGroupWithVehicle(paintingGroups);
-		addPaintingGroupWithInsect(paintingGroups);
-		addPaintingGroupWithBird(paintingGroups);
-		addPaintingGroupWithFamilyReading(paintingGroups);
+		paintingCategories.add(getPaintingGroupWithHistory());
+		addPaintingGroupWithVehicle(paintingCategories);
+		addPaintingGroupWithInsect(paintingCategories);
+		addPaintingGroupWithBird(paintingCategories);
+		addPaintingGroupWithFamilyReading(paintingCategories);
 		
-		this.paintingGroups = new PaintingGroups();
-		this.paintingGroups.setDataSource(paintingGroups); 
+		this.paintingCategories = new PaintingCategories();
+		this.paintingCategories.setDataSource(paintingCategories);
 	}
 	
 	//历史记录
-	private PaintingGroup getPaintingGroupWithHistory()
+	private PaintingCategory getPaintingGroupWithHistory()
 	{
-		PaintingGroup group = new PaintingGroup(R.string.history, R.drawable.group_history, R.raw.group_history);
+		PaintingCategory group = new PaintingCategory(R.string.history, R.drawable.group_history, R.raw.group_history);
 		
 		History history = new History(this);
 		int n = history.count();
@@ -100,9 +102,9 @@ public class MainActivity extends Activity
 	}
 	
 	//交通工具
-	private void addPaintingGroupWithVehicle(List<PaintingGroup> groups)
+	private void addPaintingGroupWithVehicle(List<PaintingCategory> groups)
 	{
-		PaintingGroup group = new PaintingGroup(R.string.vehicle, R.drawable.group_vehicle, R.raw.group_vehicle);
+		PaintingCategory group = new PaintingCategory(R.string.vehicle, R.drawable.group_vehicle, R.raw.group_vehicle);
 		
 		String[] names = {/*"feiting",*/ "reqiqiu", "lunchuan", "fanchuan", "shoutuiche", "zixingche", "motuoche", "mianbaoche", "paoche", "jiaoche", 
 				"jipuche", "changpengjipuche", /*"keche", "shuangcengkeche",*/ "xiaohuoche", "dahuoche", "kache", "saiche", "chanche", "tuoche", 
@@ -117,9 +119,9 @@ public class MainActivity extends Activity
 	}
 	
 	//昆虫
-	private void addPaintingGroupWithInsect(List<PaintingGroup> groups)
+	private void addPaintingGroupWithInsect(List<PaintingCategory> groups)
 	{
-		PaintingGroup group = new PaintingGroup(R.string.insect, R.drawable.group_insect, R.raw.group_insect);
+		PaintingCategory group = new PaintingCategory(R.string.insect, R.drawable.group_insect, R.raw.group_insect);
 		
 		String[] names = {/*"qingting",*/ "piaochong", "mayi", "yinghuochong", /*"hudie",*/ "tanglang", "mifeng", /*"lujiaochong",*/ "zhameng", "mifeng_", 
 				"hudie_", "maomaochong", /*"wenzi",*/ "chan", "wenzi_"};
@@ -131,9 +133,9 @@ public class MainActivity extends Activity
 	}
 	
 	//鸟类
-	private void addPaintingGroupWithBird(List<PaintingGroup> groups)
+	private void addPaintingGroupWithBird(List<PaintingCategory> groups)
 	{
-		PaintingGroup group = new PaintingGroup(R.string.bird, R.drawable.group_bird, R.raw.group_bird);
+		PaintingCategory group = new PaintingCategory(R.string.bird, R.drawable.group_bird, R.raw.group_bird);
 		
 		String[] names = {"juzuiniao", "ying", "wuya", "gezi", "yanzi", "maotouying", /*"fengniao",*/ "tujiu", "qie", /*"yingwu",*/ 
 				"tiane", /*"tihu",*/ "huolieniao", "juzuiniao_", "yuanyang", "maotouying_", "niao", "tuoniao", "zhuomuniao", "kongque"};
@@ -145,9 +147,9 @@ public class MainActivity extends Activity
 	}
 	
 	//亲子阅读
-	private void addPaintingGroupWithFamilyReading(List<PaintingGroup> groups)
+	private void addPaintingGroupWithFamilyReading(List<PaintingCategory> groups)
 	{
-		PaintingGroup group = new PaintingGroup(R.string.familyreading, R.drawable.group_family_reading, R.raw.group_family_reading);
+		PaintingCategory group = new PaintingCategory(R.string.familyreading, R.drawable.group_family_reading, R.raw.group_family_reading);
 		
 		String[] names = {"feiting", "keche", "shuangcengkeche", "fandouche", "qianshuiting", "youguanche", "qingting", "hudie", "lujiaochong", "wenzi", "fengniao", "yingwu", "tihu"};
 		

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.zaoqibu.foursteppainting.PaintingGroupActivity"
+        <activity android:name=".PaintingCategoryActivity"
             android:parentActivityName="com.zaoqibu.foursteppainting.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
