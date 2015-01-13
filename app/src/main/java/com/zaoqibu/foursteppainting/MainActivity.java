@@ -82,8 +82,7 @@ public class MainActivity extends Activity
 		addPaintingGroupWithVehicle(paintingCategories);
 		addPaintingGroupWithInsect(paintingCategories);
 		addPaintingGroupWithBird(paintingCategories);
-		addPaintingGroupWithFamilyReading(paintingCategories);
-		
+
 		this.paintingCategories = new PaintingCategories();
 		this.paintingCategories.setDataSource(paintingCategories);
 	}
@@ -106,10 +105,10 @@ public class MainActivity extends Activity
 	{
 		PaintingCategory group = new PaintingCategory(R.string.vehicle, R.drawable.group_vehicle, R.raw.group_vehicle);
 		
-		String[] names = {/*"feiting",*/ "reqiqiu", "lunchuan", "fanchuan", "shoutuiche", "zixingche", "motuoche", "mianbaoche", "paoche", "jiaoche", 
-				"jipuche", "changpengjipuche", /*"keche", "shuangcengkeche",*/ "xiaohuoche", "dahuoche", "kache", "saiche", "chanche", "tuoche", 
-				/*"fandouche",*/ "yaluji", "tuolaji", "jiuyuanche", "watuji", "xiaofangche", "jiuhuche", "tanke", "zhuangjiache", /*"qianshuiting", */
-				"kuaiting", "huoche", "huojian", "feiji", "zhishengji", "zhandouji", /*"youguanche",*/ "jiaobanche", "kechuan", "qingguilieche", 
+		String[] names = {"feiting", "reqiqiu", "lunchuan", "fanchuan", "shoutuiche", "zixingche", "motuoche", "mianbaoche", "paoche", "jiaoche",
+				"jipuche", "changpengjipuche", "keche", "shuangcengkeche", "xiaohuoche", "dahuoche", "kache", "saiche", "chanche", "tuoche",
+				"fandouche", "yaluji", "tuolaji", "jiuyuanche", "watuji", "xiaofangche", "jiuhuche", "tanke", "zhuangjiache", "qianshuiting",
+				"kuaiting", "huoche", "huojian", "feiji", "zhishengji", "zhandouji", "youguanche", "jiaobanche", "kechuan", "qingguilieche",
 				"huolun", "feidie", "renliche"};
 		
 		for (String name : names)
@@ -123,8 +122,8 @@ public class MainActivity extends Activity
 	{
 		PaintingCategory group = new PaintingCategory(R.string.insect, R.drawable.group_insect, R.raw.group_insect);
 		
-		String[] names = {/*"qingting",*/ "piaochong", "mayi", "yinghuochong", /*"hudie",*/ "tanglang", "mifeng", /*"lujiaochong",*/ "zhameng", "mifeng_", 
-				"hudie_", "maomaochong", /*"wenzi",*/ "chan", "wenzi_"};
+		String[] names = {"qingting", "piaochong", "mayi", "yinghuochong", "hudie", "tanglang", "mifeng", "lujiaochong", "zhameng", "mifeng_",
+				"hudie_", "maomaochong", "wenzi", "chan", "wenzi_"};
 		
 		for (String name : names)
 			group.add(PaintingFactory.create(name));
@@ -137,21 +136,8 @@ public class MainActivity extends Activity
 	{
 		PaintingCategory group = new PaintingCategory(R.string.bird, R.drawable.group_bird, R.raw.group_bird);
 		
-		String[] names = {"juzuiniao", "ying", "wuya", "gezi", "yanzi", "maotouying", /*"fengniao",*/ "tujiu", "qie", /*"yingwu",*/ 
-				"tiane", /*"tihu",*/ "huolieniao", "juzuiniao_", "yuanyang", "maotouying_", "niao", "tuoniao", "zhuomuniao", "kongque"};
-		
-		for (String name : names)
-			group.add(PaintingFactory.create(name));
-		
-		groups.add(group);
-	}
-	
-	//亲子阅读
-	private void addPaintingGroupWithFamilyReading(List<PaintingCategory> groups)
-	{
-		PaintingCategory group = new PaintingCategory(R.string.familyreading, R.drawable.group_family_reading, R.raw.group_family_reading);
-		
-		String[] names = {"feiting", "keche", "shuangcengkeche", "fandouche", "qianshuiting", "youguanche", "qingting", "hudie", "lujiaochong", "wenzi", "fengniao", "yingwu", "tihu"};
+		String[] names = {"juzuiniao", "ying", "wuya", "gezi", "yanzi", "maotouying", "fengniao", "tujiu", "qie", "yingwu",
+				"tiane", "tihu", "huolieniao", "juzuiniao_", "yuanyang", "maotouying_", "niao", "tuoniao", "zhuomuniao", "kongque"};
 		
 		for (String name : names)
 			group.add(PaintingFactory.create(name));

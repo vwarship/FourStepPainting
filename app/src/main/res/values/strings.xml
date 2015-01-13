@@ -16,7 +16,7 @@
     
     <string name="feiting">飞艇</string>
     <string name="feiting1">一个橄榄球</string>
-    <string name="feiting2">上下长鱼鳍</string>
+    <string name="feiting2">上下生鱼鳍</string>
     <string name="feiting3">不在水中游</string>
     <string name="feiting4">却在天上飞</string>
 	<string name="reqiqiu">热气球</string>
@@ -76,7 +76,7 @@
 	<string name="changpengjipuche4">就是没篷</string>
 	<string name="keche">客车</string>
 	<string name="keche1">身下两个洞</string>
-	<string name="keche2">洞里长眼睛</string>
+	<string name="keche2">洞里有眼睛</string>
 	<string name="keche3">窗户多又多</string>
 	<string name="keche4">来回把客送</string>
 	<string name="shuangcengkeche">双层客车</string>
@@ -116,7 +116,7 @@
 	<string name="tuoche4">非要再拉一节跑</string>
 	<string name="fandouche">翻斗车</string>
 	<string name="fandouche1">高高矮矮一座城</string>
-	<string name="fandouche2">城门里面长眼睛</string>
+	<string name="fandouche2">城门里面有眼睛</string>
 	<string name="fandouche3">安上窗户变大车</string>
 	<string name="fandouche4">车斗能装又能卸</string>
 	<string name="yaluji">压路机</string>
@@ -161,7 +161,7 @@
 	<string name="zhuangjiache4">房顶还有机关枪</string>
 	<string name="qianshuiting">潜水艇</string>
 	<string name="qianshuiting1">大鹅蛋</string>
-	<string name="qianshuiting2">长尾巴</string>
+	<string name="qianshuiting2">生尾巴</string>
 	<string name="qianshuiting3">戴帽子</string>
 	<string name="qianshuiting4">架眼镜</string>
 	<string name="kuaiting">快艇</string>
@@ -195,7 +195,7 @@
 	<string name="zhandouji3">两片尾翼掌方向</string>
 	<string name="zhandouji4">带着导弹进战场</string>
 	<string name="youguanche">油罐车</string>
-	<string name="youguanche1">三个圆环排成行</string>
+	<string name="youguanche1">三个圆环站一排</string>
 	<string name="youguanche2">一面红旗舞飞扬</string>
 	<string name="youguanche3">身上背着大油桶</string>
 	<string name="youguanche4">装满油来跑得忙</string>
@@ -231,7 +231,7 @@
 	<string name="renliche4">安上拉杆</string>
 	<string name="qingting">蜻蜓</string>
 	<string name="qingting1">一副望远镜</string>
-	<string name="qingting2">下边系根绳</string>
+	<string name="qingting2">下边画根绳</string>
 	<string name="qingting3">两对长翅膀</string>
 	<string name="qingting4">变身小蜻蜓</string>
 	<string name="piaochong">瓢虫</string>
@@ -251,7 +251,7 @@
 	<string name="yinghuochong4">提灯四处飞</string>
 	<string name="hudie">蝴蝶</string>
 	<string name="hudie1">一个小纽扣</string>
-	<string name="hudie2">系上小红绳</string>
+	<string name="hudie2">画上小红绳</string>
 	<string name="hudie3">翩翩起舞飞</string>
 	<string name="hudie4">我是花中蝶</string>
 	<string name="tanglang">螳螂</string>
@@ -266,9 +266,9 @@
 	<string name="mifeng4">振翅嗡嗡嗡</string>
 	<string name="lujiaochong">鹿角虫</string>
 	<string name="lujiaochong1">一头牛</string>
-	<string name="lujiaochong2">露长牙</string>
+	<string name="lujiaochong2">有长牙</string>
 	<string name="lujiaochong3">两角像弯刀</string>
-	<string name="lujiaochong4">长腿就能跑</string>
+	<string name="lujiaochong4">伸腿就能跑</string>
 	<string name="zhameng">蚱蜢</string>
 	<string name="zhameng1">小脑瓜</string>
 	<string name="zhameng2">大长腿</string>
@@ -293,7 +293,7 @@
 	<string name="wenzi1">圆圆一粒豆</string>
 	<string name="wenzi2">变成小蝌蚪</string>
 	<string name="wenzi3">钻进水草里</string>
-	<string name="wenzi4">长翅就飞走</string>
+	<string name="wenzi4">展翅就飞走</string>
 	<string name="chan">蝉</string>
 	<string name="chan1">一块砖</string>
 	<string name="chan2">画上眼</string>
@@ -335,7 +335,7 @@
 	<string name="maotouying3">翅膀收一边</string>
 	<string name="maotouying4">老鼠无处藏</string>
 	<string name="fengniao">蜂鸟</string>
-	<string name="fengniao1">一粒豆子长翅膀</string>
+	<string name="fengniao1">一粒豆子生翅膀</string>
 	<string name="fengniao2">扎上一针飞不起</string>
 	<string name="fengniao3">画上肚皮和尾羽</string>
 	<string name="fengniao4">扑腾扑腾飞起来</string>
@@ -352,7 +352,7 @@
 	<string name="yingwu">鹦鹉</string>
 	<string name="yingwu1">一个小辣椒</string>
 	<string name="yingwu2">添上尾和腿</string>
-	<string name="yingwu3">长翅就能飞</string>
+	<string name="yingwu3">展翅就能飞</string>
 	<string name="yingwu4">有张弯钩嘴</string>
 	<string name="tiane">天鹅</string>
 	<string name="tiane1">尖尖嘴</string>

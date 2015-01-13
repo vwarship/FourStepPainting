@@ -37,6 +37,7 @@
             android:screenOrientation="landscape" />
 
         <activity android:name="com.zaoqibu.foursteppainting.AboutActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.zaoqibu.foursteppainting.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
