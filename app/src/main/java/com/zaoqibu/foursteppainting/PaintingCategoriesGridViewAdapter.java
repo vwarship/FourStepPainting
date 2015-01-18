@@ -8,6 +8,7 @@ import java.util.Map;
 import com.umeng.analytics.MobclickAgent;
 import com.zaoqibu.foursteppainting.domain.PaintingCategory;
 import com.zaoqibu.foursteppainting.domain.PaintingCategories;
+import com.zaoqibu.foursteppainting.util.AssetsUtil;
 import com.zaoqibu.foursteppainting.util.BitmapUtil;
 import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
 
@@ -77,13 +78,7 @@ public class PaintingCategoriesGridViewAdapter extends BaseAdapter
 		
 		ImageView imageView = (ImageView)item.findViewById(R.id.itemImage);
 
-        //TODO
-        InputStream inputStream = null;
-        try {
-            inputStream = context.getAssets().open(paintingCategory.getIcon());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        InputStream inputStream = AssetsUtil.readAssetsFile(context, paintingCategory.getIcon());
         bitmap = BitmapUtil.decodeSampledBitmapFromStream(inputStream, 150, 150);
         imageView.setImageBitmap(bitmap);
         imageView.setBackgroundColor(Color.parseColor(paintingCategory.getBackgroundColor()));
@@ -97,7 +92,6 @@ public class PaintingCategoriesGridViewAdapter extends BaseAdapter
 				map.put("group", paintingCategory.getName());
 				MobclickAgent.onEvent(context, "group_sound", map);
 				
-				//TODO
                 mediaPlayer.play(context, paintingCategory.getSoundPath());
 			}
 		});

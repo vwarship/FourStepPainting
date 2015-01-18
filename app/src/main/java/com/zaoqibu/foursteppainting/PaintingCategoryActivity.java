@@ -16,12 +16,13 @@ import com.zaoqibu.foursteppainting.util.PaintingsXmlParser;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PaintingCategoryActivity extends Activity
+public class PaintingCategoryActivity extends ActionBarActivity
 {
 	public static final String ARG_PAINTING_CATEGORY = "paintingCategory";
 	private PaintingCategory paintingCategory;
@@ -34,7 +35,7 @@ public class PaintingCategoryActivity extends Activity
 		paintingCategory = (PaintingCategory)getIntent().getExtras().getSerializable(ARG_PAINTING_CATEGORY);
         initPaintings();
 
-        getActionBar().setTitle(paintingCategory.getName());
+        getSupportActionBar().setTitle(paintingCategory.getName());
 		
 		final int calcGridItemWidth = GridViewUtil.calcItemWidth(this);
 		

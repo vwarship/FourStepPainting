@@ -25,8 +25,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PaintingActivity extends FragmentActivity
-{
+public class PaintingActivity extends FragmentActivity {
 	public static final String ARG_PAINTING = "painting";
 	private Painting painting;
 	private int position = 0;
@@ -46,15 +45,14 @@ public class PaintingActivity extends FragmentActivity
             @Override
             public void onPageSelected(int position) {
             	PaintingActivity.this.position = position;
-                //TODO
             	MediaPlayerSingleton.getInstance().play(PaintingActivity.this, painting.get(position).getSoundPath());
             }
 		});
 		
 		paintingPager.setCurrentItem(position);
-        //TODO
 		MediaPlayerSingleton.getInstance().play(this, painting.get(position).getSoundPath());
-		
+
+        //TODO
 //		History history = new History(this);
 //		history.putPainting(painting.getTag());
 	}
@@ -120,8 +118,6 @@ public class PaintingActivity extends FragmentActivity
                 public void onClick(View v) {
                     //事件统计
                     MobclickAgent.onEvent(PictureFragment.this.getActivity(), "picture_sound");
-
-                    //TODO
                     MediaPlayerSingleton.getInstance().play(PictureFragment.this.getActivity(), picture.getSoundPath());
                 }
             });

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.util.Xml;
 import android.view.Menu;
@@ -36,7 +37,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class MainActivity extends Activity 
+public class MainActivity extends ActionBarActivity
 {
 	private PaintingCategories paintingCategories;
 	
