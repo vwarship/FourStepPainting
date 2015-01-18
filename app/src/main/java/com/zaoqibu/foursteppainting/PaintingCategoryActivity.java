@@ -1,12 +1,17 @@
 package com.zaoqibu.foursteppainting;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.umeng.analytics.MobclickAgent;
 import com.zaoqibu.foursteppainting.domain.Painting;
 import com.zaoqibu.foursteppainting.domain.PaintingCategory;
+import com.zaoqibu.foursteppainting.domain.Paintings;
+import com.zaoqibu.foursteppainting.util.CategoriesXmlParser;
 import com.zaoqibu.foursteppainting.util.GridViewUtil;
+import com.zaoqibu.foursteppainting.util.PaintingsXmlParser;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,8 +32,9 @@ public class PaintingCategoryActivity extends Activity
 		setContentView(R.layout.activity_paintingcategory);
 		
 		paintingCategory = (PaintingCategory)getIntent().getExtras().getSerializable(ARG_PAINTING_CATEGORY);
-		
-		getActionBar().setTitle(paintingCategory.getName());
+        initPaintings();
+
+        getActionBar().setTitle(paintingCategory.getName());
 		
 		final int calcGridItemWidth = GridViewUtil.calcItemWidth(this);
 		
@@ -42,8 +48,8 @@ public class PaintingCategoryActivity extends Activity
 				
 				//事件统计
 				Map<String,String> map = new HashMap<String,String>();
-				map.put("group", getResources().getString(paintingCategory.getName()));
-				map.put("painting", getResources().getString(painting.getName()));
+				map.put("group", paintingCategory.getName());
+				map.put("painting", painting.getName());
 				MobclickAgent.onEvent(PaintingCategoryActivity.this, "painting", map);
 				
 				Intent intent = new Intent(PaintingCategoryActivity.this, PaintingActivity.class);
@@ -53,7 +59,22 @@ public class PaintingCategoryActivity extends Activity
 		});
 	}
 
-	public void onResume() {
+    private void initPaintings() {
+        PaintingsXmlParser parser = new PaintingsXmlParser();
+        InputStream inputStream = null;
+        Paintings paintings = new Paintings();
+        try {
+            String xmlPath = String.format("%s/%s", paintingCategory.getCodeName(), "paintings.xml");
+            inputStream = getAssets().open(xmlPath);
+            paintings = parser.parse(inputStream, paintingCategory.getCodeName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        paintingCategory.setPaintings(paintings);
+    }
+
+    public void onResume() {
 		super.onResume();
 		MobclickAgent.onPageStart(this.getClass().getSimpleName());
 		MobclickAgent.onResume(this);

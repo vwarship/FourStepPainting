@@ -1,5 +1,7 @@
 package com.zaoqibu.foursteppainting;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,13 +13,13 @@ import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class PaintingCategoriesGridViewAdapter extends BaseAdapter
 {
@@ -74,20 +76,29 @@ public class PaintingCategoriesGridViewAdapter extends BaseAdapter
 		final PaintingCategory paintingCategory = paintingCategories.get(position);
 		
 		ImageView imageView = (ImageView)item.findViewById(R.id.itemImage);
-		
-		bitmap = BitmapUtil.decodeSampledBitmapFromResource(context.getResources(), paintingCategory.getIcon(), 150, 150);
-		imageView.setImageBitmap(bitmap);
-		
+
+        //TODO
+        InputStream inputStream = null;
+        try {
+            inputStream = context.getAssets().open(paintingCategory.getIcon());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bitmap = BitmapUtil.decodeSampledBitmapFromStream(inputStream, 150, 150);
+        imageView.setImageBitmap(bitmap);
+        imageView.setBackgroundColor(Color.parseColor(paintingCategory.getBackgroundColor()));
+
 		ImageView imageViewPlay = (ImageView)item.findViewById(R.id.imageViewPlay);
 		imageViewPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//事件统计
 				Map<String,String> map = new HashMap<String,String>();
-				map.put("group", context.getResources().getString(paintingCategory.getName()));
+				map.put("group", paintingCategory.getName());
 				MobclickAgent.onEvent(context, "group_sound", map);
 				
-				mediaPlayer.play(context, paintingCategory.getSound());
+				//TODO
+                mediaPlayer.play(context, paintingCategory.getSoundPath());
 			}
 		});
 		

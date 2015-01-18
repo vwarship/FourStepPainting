@@ -10,47 +10,50 @@ public class PaintingCategory implements Serializable, GridViewDataItem
 {
 	private static final long serialVersionUID = -9205263284164026171L;
 
-	private int name;
-	private int icon;
-	private int sound;
-	
-	private List<Painting> paintings = new ArrayList<Painting>();
-	
-	public PaintingCategory(int name, int icon, int sound)
-	{
-		this.name = name;
-		this.icon = icon;
-		this.sound = sound;
-	}
-	
-	public void add(Painting painting)
-	{
-		paintings.add(painting);
-	}
-	
-	public Painting get(int index)
-	{
+    private Paintings paintings;
+    private String name;
+    private String codeName;
+    private String backgroundColor;
+
+    public PaintingCategory(String name, String codeName, String backgroundColor) {
+        this.name = name;
+        this.codeName = codeName;
+        this.backgroundColor = backgroundColor;
+    }
+
+    public void setPaintings(Paintings paintings) {
+        this.paintings = paintings;
+    }
+
+	public Painting get(int index) {
 		return paintings.get(index);
 	}
 	
-	public int count()
-	{
-		return paintings.size();
+	public int count() {
+		return paintings.count();
 	}
 
 	@Override
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
 	@Override
-	public int getIcon() {
-		return icon;
+	public String getIcon() {
+		return String.format("%s/%s.png", codeName, codeName);
 	}
 
 	@Override
-	public int getSound() {
-		return sound;
+	public String getSoundPath() {
+		return String.format("%s/%s.mp3", codeName, codeName);
 	}
+
+    public String getCodeName() {
+        return codeName;
+    }
+
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
 
 }

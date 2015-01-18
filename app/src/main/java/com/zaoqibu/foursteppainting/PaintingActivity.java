@@ -22,6 +22,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class PaintingActivity extends FragmentActivity
 {
 	public static final String ARG_PAINTING = "painting";
@@ -43,15 +46,17 @@ public class PaintingActivity extends FragmentActivity
             @Override
             public void onPageSelected(int position) {
             	PaintingActivity.this.position = position;
-            	MediaPlayerSingleton.getInstance().play(PaintingActivity.this, painting.get(position).getSound());
+                //TODO
+            	MediaPlayerSingleton.getInstance().play(PaintingActivity.this, painting.get(position).getSoundPath());
             }
 		});
 		
 		paintingPager.setCurrentItem(position);
-		MediaPlayerSingleton.getInstance().play(this, painting.get(position).getSound());
+        //TODO
+		MediaPlayerSingleton.getInstance().play(this, painting.get(position).getSoundPath());
 		
-		History history = new History(this);
-		history.putPainting(painting.getTag());
+//		History history = new History(this);
+//		history.putPainting(painting.getTag());
 	}
 	
 	public class PaintingPagerAdapter extends FragmentPagerAdapter
@@ -97,30 +102,30 @@ public class PaintingActivity extends FragmentActivity
 			View rootView = inflater.inflate(R.layout.activity_picture, container, false);
 			
 			ImageView imageViewPicture = (ImageView)rootView.findViewById(R.id.imageViewPicture);
-			bitmap = BitmapUtil.decodeSampledBitmapFromResource(getResources(), picture.getDrawable(), 480, 800);
+            InputStream inputStream = null;
+            try {
+                inputStream = getActivity().getAssets().open(picture.getImagePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+			bitmap = BitmapUtil.decodeSampledBitmapFromStream(inputStream, 480, 800);
 			imageViewPicture.setImageBitmap(bitmap);
 			
 			TextView textViewPictureContent = (TextView)rootView.findViewById(R.id.textViewPictureContent);
-			textViewPictureContent.setText(String.format("%d. %s", picture.getOrder(), getResources().getString(picture.getContent())));
+			textViewPictureContent.setText(String.format("%d. %s", picture.getOrder(), picture.getContent()));
 			
 			ImageButton imageButtonPicturePlay = (ImageButton)rootView.findViewById(R.id.imageButtonPicturePlay);
-			if (picture.getSound() <= 0) //没有声音就隐藏
-			{
-				imageButtonPicturePlay.setVisibility(View.GONE);
-			}
-			else
-			{
-				imageButtonPicturePlay.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						//事件统计
-						MobclickAgent.onEvent(PictureFragment.this.getActivity(), "picture_sound");
+            imageButtonPicturePlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //事件统计
+                    MobclickAgent.onEvent(PictureFragment.this.getActivity(), "picture_sound");
 
-						MediaPlayerSingleton.getInstance().play(PictureFragment.this.getActivity(), picture.getSound());
-					}
-				});
-			}
-			
+                    //TODO
+                    MediaPlayerSingleton.getInstance().play(PictureFragment.this.getActivity(), picture.getSoundPath());
+                }
+            });
+
 			return rootView;
 		}
 		

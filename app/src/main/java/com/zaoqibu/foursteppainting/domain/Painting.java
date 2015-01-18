@@ -10,16 +10,15 @@ public class Painting implements Serializable, GridViewDataItem
 {
 	private static final long serialVersionUID = 3970057122837909051L;
 
-	private int name;
-	private int sound;
-	private List<Picture> pictures = new ArrayList<Picture>();
-	private String tag;
+    private List<Picture> pictures = new ArrayList<Picture>();
+    private String name;
+    private String codeName;
+    private String sound;
 
-	public Painting(int name, int sound, String tag)
-	{
-		this.name = name;
-		this.sound = sound;
-		this.tag = tag;
+	public Painting(String name, String codeName, String sound) {
+        this.name = name;
+        this.codeName = codeName;
+        this.sound = sound;
 	}
 
 	public void add(Picture picture)
@@ -38,23 +37,22 @@ public class Painting implements Serializable, GridViewDataItem
 	}
 	
 	@Override
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 	
 	@Override
-	public int getIcon() 
-	{
-		return pictures.get(count()-1).getDrawable();
+	public String getIcon() {
+		return pictures.get(count()-1).getImagePath();
 	}
 
 	@Override
-	public int getSound() {
+	public String getSoundPath() {
 		return sound;
 	}
-	
-	public String getTag() {
-		return tag;
-	}
+
+    public String getCodeName() {
+        return codeName;
+    }
 
 }
