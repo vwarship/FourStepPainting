@@ -1,17 +1,5 @@
 package com.zaoqibu.foursteppainting;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.umeng.analytics.MobclickAgent;
-import com.zaoqibu.foursteppainting.domain.PaintingCategory;
-import com.zaoqibu.foursteppainting.domain.PaintingCategories;
-import com.zaoqibu.foursteppainting.util.AssetsUtil;
-import com.zaoqibu.foursteppainting.util.BitmapUtil;
-import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -21,6 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.umeng.analytics.MobclickAgent;
+import com.zaoqibu.foursteppainting.domain.PaintingCategories;
+import com.zaoqibu.foursteppainting.domain.PaintingCategory;
+import com.zaoqibu.foursteppainting.util.AssetsUtil;
+import com.zaoqibu.foursteppainting.util.BitmapUtil;
+import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaintingCategoriesGridViewAdapter extends BaseAdapter
 {
@@ -83,7 +83,10 @@ public class PaintingCategoriesGridViewAdapter extends BaseAdapter
         imageView.setImageBitmap(bitmap);
         imageView.setBackgroundColor(Color.parseColor(paintingCategory.getBackgroundColor()));
 
-		ImageView imageViewPlay = (ImageView)item.findViewById(R.id.imageViewPlay);
+        TextView textView = (TextView)item.findViewById(R.id.itemText);
+        textView.setText(paintingCategory.getName());
+
+        ImageView imageViewPlay = (ImageView)item.findViewById(R.id.imageViewPlay);
 		imageViewPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

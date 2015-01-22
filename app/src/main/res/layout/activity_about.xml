@@ -16,16 +16,6 @@
         android:text="@string/about_copyright"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_launcher" />
-
     <TextView
         android:id="@+id/aboutAuthor"
         android:layout_width="wrap_content"
@@ -76,10 +66,32 @@
         android:id="@+id/aboutIntroduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:text="@string/about_introduction"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="早起步开发的应用："
+        android:id="@+id/textView"
+        android:layout_below="@+id/aboutIntroduction"
+        android:layout_alignLeft="@+id/aboutVerion"
+        android:layout_alignStart="@+id/aboutVerion"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="四步绘画\n教育名言\n幼儿园音乐"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

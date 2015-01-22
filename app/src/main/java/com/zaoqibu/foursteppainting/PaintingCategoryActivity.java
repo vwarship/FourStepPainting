@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PaintingCategoryActivity extends ActionBarActivity
+public class PaintingCategoryActivity extends Activity
 {
 	public static final String ARG_PAINTING_CATEGORY = "paintingCategory";
 	private PaintingCategory paintingCategory;
@@ -35,7 +35,7 @@ public class PaintingCategoryActivity extends ActionBarActivity
 		paintingCategory = (PaintingCategory)getIntent().getExtras().getSerializable(ARG_PAINTING_CATEGORY);
         initPaintings();
 
-        getSupportActionBar().setTitle(paintingCategory.getName());
+        getActionBar().setTitle(paintingCategory.getName());
 		
 		final int calcGridItemWidth = GridViewUtil.calcItemWidth(this);
 		

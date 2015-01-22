@@ -2,7 +2,6 @@ package com.zaoqibu.foursteppainting.util;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.util.Log;
 
@@ -16,6 +15,7 @@ public class MediaPlayerSingleton
 	private MediaPlayer player = null;
 	
 	private MediaPlayerSingleton() {
+        player = new MediaPlayer();
 	}
 
     private static MediaPlayer create(Context context, String assetsPath) {
@@ -44,18 +44,16 @@ public class MediaPlayerSingleton
 
     public void play(Context context, String soundAssetsPath)
 	{
-		synchronized (MediaPlayer.class) {
-			release();
-	    	player = create(context, soundAssetsPath);
-		}
-    	
-		player.start();
+        synchronized (MediaPlayer.class) {
+            release();
+            player = create(context, soundAssetsPath);
+        }
+
+        player.start();
 	}
 	
-	public void release()
-	{
-    	if (player!=null)
-    	{
+	public void release() {
+    	if (player!=null) {
     		player.release();
     	}
 	}

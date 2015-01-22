@@ -1,43 +1,31 @@
 package com.zaoqibu.foursteppainting;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.umeng.analytics.MobclickAgent;
-import com.zaoqibu.foursteppainting.domain.PaintingCategory;
-import com.zaoqibu.foursteppainting.domain.PaintingCategories;
-import com.zaoqibu.foursteppainting.util.CategoriesXmlParser;
-import com.zaoqibu.foursteppainting.util.GridViewUtil;
-import com.zaoqibu.foursteppainting.util.History;
-import com.zaoqibu.foursteppainting.util.PaintingFactory;
-
-import android.content.res.AssetFileDescriptor;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.util.Xml;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.AdapterView.OnItemClickListener;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
+import com.umeng.analytics.MobclickAgent;
+import com.zaoqibu.foursteppainting.domain.PaintingCategories;
+import com.zaoqibu.foursteppainting.domain.PaintingCategory;
+import com.zaoqibu.foursteppainting.util.CategoriesXmlParser;
+import com.zaoqibu.foursteppainting.util.GridViewUtil;
+import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
+import com.zaoqibu.foursteppainting.util.VibratorUtil;
 
-public class MainActivity extends ActionBarActivity
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends Activity
 {
 	private PaintingCategories paintingCategories;
 	
@@ -70,6 +58,7 @@ public class MainActivity extends ActionBarActivity
         gvPaintingCategory.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                VibratorUtil.vibrate(MainActivity.this);
                 PaintingCategory paintingCategory = paintingCategories.get(position);
 
                 //事件统计
@@ -132,5 +121,11 @@ public class MainActivity extends ActionBarActivity
 		MobclickAgent.onPageEnd(this.getClass().getSimpleName());
 		MobclickAgent.onPause(this);
 	}
-		
+
+    @Override
+    protected void onDestroy() {
+        MediaPlayerSingleton.getInstance().release();
+        super.onDestroy();
+    }
+
 }
