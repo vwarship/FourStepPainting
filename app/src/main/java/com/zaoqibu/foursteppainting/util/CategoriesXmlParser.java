@@ -1,7 +1,5 @@
 package com.zaoqibu.foursteppainting.util;
 
-import android.util.Log;
-
 import com.zaoqibu.foursteppainting.domain.PaintingCategories;
 import com.zaoqibu.foursteppainting.domain.PaintingCategory;
 

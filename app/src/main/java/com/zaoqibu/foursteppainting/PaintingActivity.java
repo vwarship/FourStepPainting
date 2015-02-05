@@ -1,12 +1,5 @@
 package com.zaoqibu.foursteppainting;
 
-import com.umeng.analytics.MobclickAgent;
-import com.zaoqibu.foursteppainting.domain.Painting;
-import com.zaoqibu.foursteppainting.domain.Picture;
-import com.zaoqibu.foursteppainting.util.BitmapUtil;
-import com.zaoqibu.foursteppainting.util.History;
-import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,14 +15,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+import com.zaoqibu.foursteppainting.domain.Painting;
+import com.zaoqibu.foursteppainting.domain.Picture;
+import com.zaoqibu.foursteppainting.util.BitmapUtil;
+import com.zaoqibu.foursteppainting.util.MediaPlayerSingleton;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class PaintingActivity extends FragmentActivity {
 	public static final String ARG_PAINTING = "painting";
 	private Painting painting;
-	private int position = 0;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,11 +42,11 @@ public class PaintingActivity extends FragmentActivity {
 		paintingPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-            	PaintingActivity.this.position = position;
             	MediaPlayerSingleton.getInstance().play(PaintingActivity.this, painting.get(position).getSoundPath());
             }
 		});
-		
+
+        int position = 0;
 		paintingPager.setCurrentItem(position);
 		MediaPlayerSingleton.getInstance().play(this, painting.get(position).getSoundPath());
 
@@ -91,7 +89,7 @@ public class PaintingActivity extends FragmentActivity {
 		public static final String ARG_PAINTINGACTIVITY = "paintingActivity";
 		public static final String ARG_PICTURE = "picture";
 		private Bitmap bitmap = null;
-		
+
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
