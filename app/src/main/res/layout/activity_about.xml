@@ -85,7 +85,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="四步绘画\n教育名言\n幼儿园音乐"
+        android:text="四步绘画\n教育名言\n幼儿园音乐\n幼儿园故事\n杰哥国旗"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/textView"
